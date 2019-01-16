@@ -15,7 +15,7 @@ export default class Films extends Component {
                     <CardImg 
                         top 
                         width="100" 
-                        src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=250&h=300" alt="Card image cap" 
+                        src="./images/a-new-hope.jpg" alt="Card image cap" 
                     />
                     <CardBody>
                     <CardTitle>Titulo: {this.props.title}</CardTitle>
