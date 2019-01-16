@@ -1,24 +1,38 @@
 import React,{Component} from 'react';
 import Film from '../components/Film';
-import FilmStore from '../stores/FilmStore';
+import axios from 'axios';
 
 
 export default class FilmList extends Component{
     constructor(props){
-        super(props);
+        super(props)
         this.state = {
-            Films: FilmStore.getAll()
+            films: []
         }
     }
 
-render(){
-    const ListComp = this.state.Films.map((pro) => {
-        return <Film key={pro.episode_id} {...pro}/>
-    })    
-    return (
-        <div className="row">
-            {ListComp}
-        </div>
-    );
+    componentDidMount() {
+        axios.get('https://swapi.co/api/films/')
+        .then((json) => {
+            console.log("Impresión de axios.get::::::")
+            console.log(json.data.results)
+            this.setState({
+                films: json.data.results
+            })
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }
-}
+      
+    render(){
+        const ListComp = this.state.films.map((pro) => {
+            return <Film key={pro.episode_id} {...pro}/>
+        })    
+        return (
+            <div className="row">
+                {ListComp}
+            </div>
+        );
+        }
+    }

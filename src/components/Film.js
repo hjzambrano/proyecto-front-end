@@ -5,8 +5,6 @@ import {
 } from 'reactstrap';
 import * as CartActions from '../actions/CardActions';
 
-
-
 export default class Films extends Component {
     render(){
         return (
@@ -15,7 +13,7 @@ export default class Films extends Component {
                     <CardImg 
                         top 
                         width="100" 
-                        src="./images/a-new-hope.jpg" alt="Card image cap" 
+                        src={"./images/" + this.props.title.split(" ").join("-").toLowerCase() + ".jpg"} alt="Card image cap" 
                     />
                     <CardBody>
                     <CardTitle>Titulo: {this.props.title}</CardTitle>
@@ -23,9 +21,9 @@ export default class Films extends Component {
                     <CardSubtitle>Fecha: {this.props.release_date}</CardSubtitle>
                     <CardSubtitle>Director: {this.props.director}</CardSubtitle>
                     <CardSubtitle>Productor: {this.props.producer}</CardSubtitle>
+                    <CardText>{"./images/" + this.props.title.split(" ").join("-").toLowerCase() + ".jpg"}</CardText>
 
-                    <Button color="Primary"
-                        onClick={() => CartActions.addItemCart(this.props)}>Detalles</Button>
+                    <Button color="Primary">Detalles</Button>
                     </CardBody>
                 </Card>
             </div>    

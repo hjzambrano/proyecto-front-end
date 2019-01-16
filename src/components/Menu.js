@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import CartStore from '../stores/CardStores';
 import {
   Collapse,
   Navbar,
@@ -19,7 +18,6 @@ export default class Menu extends Component {
     this.toggle = this.toggle.bind(this);
     this.state = {
       isOpen: false,
-      totalItemCart: CartStore.countItemCart()
     }
   }
 
@@ -29,13 +27,7 @@ export default class Menu extends Component {
     });
   }
 
-  componentWillMount() {
-    CartStore.on('change', () => {
-      this.setState({
-        totalItemCart: CartStore.countItemCart()
-      });
-    });
-  }
+
 
   render() {
     return (
