@@ -40,16 +40,16 @@ export default class Menu extends Component {
         <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul className="navbar-nav mr-auto mt-2 mt-lg-0">
             <li className="nav-item active">
-              <a className="nav-link" href="#">Películas <span className="sr-only">(current)</span></a>
+              <a className="nav-link" href="Peliculas">Películas <span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Personajes</a>
+              <a className="nav-link" href="Personales">Personajes</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Planetas</a>
+              <a className="nav-link" href="Planetas">Planetas</a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="#">Vehículos</a>
+              <a className="nav-link" href="Vehiculos">Vehículos</a>
             </li>
           </ul>
           <form className="form-inline my-2 my-lg-0">

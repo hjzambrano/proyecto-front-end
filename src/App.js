@@ -10,7 +10,7 @@ class App extends Component {
       <div>
         <Menu />
       <div className="container">
-          <Route exact path={'/'} component={FilmList} />
+          <Route exact path={'/Peliculas'} component={FilmList} />
           <Route exact path={'/Personajes'} component={PeopleList} />
       </div>
       </div>

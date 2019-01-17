@@ -1,25 +1,39 @@
 import React,{Component} from 'react';
-import Film from '../components/Film';
+import People from '../components/People';
 import axios from 'axios';
 
+
 export default class PeopleList extends Component{
-    constructor(props) {
+    constructor(props){
         super(props)
         this.state = {
-          people: []
-      }
+            people: []
+        }
     }
-    
+
     componentDidMount() {
         axios.get('https://swapi.co/api/people/')
-          .then(json => {
-            const people = json.data.results;
-            console.log(people);
-          })
-          .catch((err) => {
+        .then((json) => {
+            this.setState({
+                people: json.data.results
+
+            })
+            console.log(json.data.results)
+        })
+        .catch((err) => {
             console.log(err)
-          })
-      }
+        })
 
-
-}
+    }
+      
+    render(){
+        const ListComp = this.state.people.map((pro) => {
+            return <People name={pro.name} {...pro}/>
+        })    
+        return (
+            <div className="row">
+                {ListComp}
+            </div>
+        );
+        }
+    }
