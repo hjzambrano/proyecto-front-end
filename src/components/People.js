@@ -8,7 +8,7 @@ import {
 export default class People extends Component {
     render() {
         return (
-            <div className="col-md-3">
+            <div className="col-sm-2">
                 <Card>
                     <CardImg
                         top
@@ -18,6 +18,7 @@ export default class People extends Component {
                     <CardBody>
                         <CardTitle align="center"><h5>{this.props.name}</h5></CardTitle>
                         <CardSubtitle align="center"><h6>Altura: {this.props.height}</h6></CardSubtitle>
+                        <CardSubtitle align="center">Especie: {this.props.species}</CardSubtitle>
                         <CardText></CardText>
 
                     </CardBody>

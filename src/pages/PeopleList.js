@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import People from '../components/People';
+import DetalleEspecie from '../components/DetalleEspecie';
 import axios from 'axios';
 
 
@@ -16,7 +17,6 @@ export default class PeopleList extends Component{
         .then((json) => {
             this.setState({
                 people: json.data.results
-
             })
             console.log(json.data.results)
         })
@@ -25,11 +25,13 @@ export default class PeopleList extends Component{
         })
 
     }
-      
+
+
     render(){
         const ListComp = this.state.people.map((pro) => {
-            return <People name={pro.name} {...pro}/>
+            return <People name={pro.name}  {...pro}/>
         })    
+
         return (
             <div className="row">
                 {ListComp}

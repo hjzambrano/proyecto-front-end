@@ -14,8 +14,6 @@ export default class FilmList extends Component{
     componentDidMount() {
         axios.get('https://swapi.co/api/films/')
         .then((json) => {
-            console.log("Impresión de axios.get::::::")
-            console.log(json.data.results)
             this.setState({
                 films: json.data.results
             })
@@ -24,7 +22,8 @@ export default class FilmList extends Component{
             console.log(err)
         })
     }
-      
+
+     
     render(){
         const ListComp = this.state.films.map((pro) => {
             return <Film key={pro.episode_id} {...pro}/>

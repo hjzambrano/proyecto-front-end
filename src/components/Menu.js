@@ -43,7 +43,7 @@ export default class Menu extends Component {
               <a className="nav-link" href="Peliculas">Películas <span className="sr-only">(current)</span></a>
             </li>
             <li className="nav-item">
-              <a className="nav-link" href="Personales">Personajes</a>
+              <a className="nav-link" href="Personajes">Personajes</a>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="Planetas">Planetas</a>
