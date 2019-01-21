@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import People from '../components/PeopleCard';
-import PeopleDetails from '../components/PeopleDetails';
+import PlanetCard from '../components/PlanetCard';
 import axios from 'axios';
 
 
 
-export default class PeopleList extends Component {
+export default class PlanetsList extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -14,16 +13,17 @@ export default class PeopleList extends Component {
     }
 
     componentDidMount() {
-        this.getFilms()
+        this.getPlanets()
 
     }
     
-    getFilms() {
-        axios.get('https://swapi.co/api/people/')
+    getPlanets() {
+        axios.get('https://swapi.co/api/planets/')
             .then((json) => {
                 this.setState({
                     data: json.data.results
                 })
+                console.log(json.data.results)
             })
             .catch((err) => console.log(err))
     }
@@ -33,12 +33,14 @@ export default class PeopleList extends Component {
 
         const cardList = this.state.data.map((d) => {
             return (
-                <PeopleDetails
+                <PlanetCard
                     key={d.url}
                     name={d.name}
-                    species={d.species}
-                    homeWorld={d.homeworld}
-                    films={d.films}
+                    diameter={d.diameter}
+                    climate={d.climate}
+                    terrain={d.terrain}
+                    surfaceWater={d.surface_water}
+                    population={d.population}
                 />
             )
         })

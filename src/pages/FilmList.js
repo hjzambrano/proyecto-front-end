@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import Film from '../components/Film';
+import FilmCard from '../components/FilmCard';
 import axios from 'axios';
 
 
@@ -26,7 +26,7 @@ export default class FilmList extends Component{
      
     render(){
         const ListComp = this.state.films.map((pro) => {
-            return <Film key={pro.episode_id} {...pro}/>
+            return <FilmCard key={pro.episode_id} {...pro}/>
         })    
         return (
             <div className="row">
