@@ -31,22 +31,22 @@ export default class PeopleList extends Component {
 
     render() {
 
-        const cardList = this.state.data.map((d) => {
-            return (
-                <PeopleDetails
-                    key={d.url}
-                    name={d.name}
-                    species={d.species}
-                    homeWorld={d.homeworld}
-                    films={d.films}
-                />
-            )
-        })
+            const cardList = this.state.data.map((d) => {
+                return (
+                    <PeopleDetails
+                        key={d.url}
+                        name={d.name}
+                        species={d.species}
+                        homeWorld={d.homeworld}
+                        films={d.films}
+                    />
+                )
+            })
 
-        return (
-            <div className="row">
-                {cardList}
-            </div>
-        );
+            return (
+                <div className="row">
+                    {cardList}
+                </div>
+            );
     }
 }
