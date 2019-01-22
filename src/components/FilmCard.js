@@ -1,25 +1,64 @@
 import React, { Component } from 'react';
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    CardTitle, CardSubtitle, Button,
+    Popover, PopoverHeader, PopoverBody,
+    ButtonToolbar
 } from 'reactstrap';
+import axios from 'axios';
 
 
 export default class FilmCard extends Component {
-    handleClickDetalle  () {
-        alert('Pendiente Elaborar otro Card con la siguiente información: \n \n' + 
-              this.props.title +'\n'+
-              this.props.episode_id +'\n'+
-              this.props.release_date.split("-").reverse().join("-") +'\n'+
-              this.props.director +'\n'+
-              this.props.producer +'\n'+
-              this.props.opening_crawl +'\n'+
-              'Lista de Personajes'
-              );
+    constructor(props) {
+        super(props);
+
+        this.toggle = this.toggle.bind(this);
+        this.toggleBtn2 = this.toggleBtn2.bind(this);        
+        this.state = {
+            popoverOpenBtn1: false,
+            popoverOpenBtn2: false,
+            charactersName: []
+        };
     }
 
-    handleClickSinopsis() { 
-        alert('Pendiente Diseñar salida de la sighuiente Sinopsis: \n \n'+this.props.opening_crawl);
+    toggle() {
+        this.setState({
+            popoverOpenBtn1: !this.state.popoverOpenBtn1    
+        });
+    }
+
+    toggleBtn2() {
+        this.setState({
+            popoverOpenBtn2: !this.state.popoverOpenBtn2
+        });
+    }
+
+    componentDidMount() {
+
+        this.getPeople();
+
+    }
+
+    getPeople() {
+
+        const peopleArray = [];
+
+        const allPeople = this.props.characters.map((peopleUrl) => {
+            axios.get(peopleUrl) 
+            .then((json) => {
+                peopleArray.push(json.data.name+", ")
+                this.setState({
+                    charactersName: peopleArray
+                })                
+            })      
+            .catch((err) => {
+                console.log(err)
+            })
+        })
+    }
+
+    handleMouseLeave() {
+
     }
 
     render() {
@@ -39,8 +78,28 @@ export default class FilmCard extends Component {
                         <CardSubtitle><strong>Director:</strong> {this.props.director}</CardSubtitle>
                         <CardSubtitle><strong>Productor:</strong> {this.props.producer}</CardSubtitle>
                         <CardText></CardText>
-                        <Button color="info" size="md" block onClick={() => this.handleClickSinopsis()}>Sinopsis</Button>
-                        <Button color="secondary" size="md" block onClick={() => this.handleClickDetalle()}>Detalle</Button>
+
+                        <Button id={this.props.title.split(" ").join("")} type="button" color="info" block>
+                            Sinopsis
+                            </Button>
+                        <Popover placement="top" isOpen={this.state.popoverOpenBtn1} 
+                                 target={this.props.title.split(" ").join("")} toggle={this.toggle}>
+                            <PopoverHeader>{this.props.title} (Sinopsis)</PopoverHeader>
+                            <PopoverBody>{this.props.opening_crawl}</PopoverBody>
+                        </Popover>
+
+                        <Button id={this.props.title.split(" ").join("") + "1"} type="button" color="secondary" block>
+                            Personajes
+                            </Button>
+                        <Popover placement="top" isOpen={this.state.popoverOpenBtn2} 
+                                 target={this.props.title.split(" ").join("") + "1"} toggle={this.toggleBtn2}>
+                            <PopoverHeader>{this.props.title} (Personajes)</PopoverHeader>
+                            <PopoverBody> 
+                                {this.state.charactersName.sort()}
+                            </PopoverBody>
+                        </Popover>
+
+
                     </CardBody>
                 </Card>
             </div>
