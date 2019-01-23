@@ -7,12 +7,13 @@ export default class FilmList extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            films: []
-
+            films: [],
+            people: []
         }
     }
 
     componentDidMount() {
+
         this.getFilms()
     }
 
@@ -27,6 +28,7 @@ export default class FilmList extends Component {
                 console.log(err)
             })
     }
+
 
     render() {
         const ListComp = this.state.films.map((pro) => {

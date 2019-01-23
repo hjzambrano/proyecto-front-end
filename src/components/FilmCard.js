@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button,
-    Popover, PopoverHeader, PopoverBody,
-    ButtonToolbar
+    Popover, PopoverHeader, PopoverBody
 } from 'reactstrap';
 import axios from 'axios';
 
@@ -57,9 +56,6 @@ export default class FilmCard extends Component {
         })
     }
 
-    handleMouseLeave() {
-
-    }
 
     render() {
         return (

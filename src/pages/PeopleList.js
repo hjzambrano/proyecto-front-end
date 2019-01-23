@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import People from '../components/PeopleCard';
 import PeopleDetails from '../components/PeopleDetails';
 import axios from 'axios';
 
