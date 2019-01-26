@@ -11,7 +11,7 @@ export default class FilmCard extends Component {
     constructor(props) {
         super(props);
 
-        this.toggle = this.toggle.bind(this);
+        this.toggleBtn1 = this.toggleBtn1.bind(this);
         this.toggleBtn2 = this.toggleBtn2.bind(this);        
         this.state = {
             popoverOpenBtn1: false,
@@ -20,7 +20,7 @@ export default class FilmCard extends Component {
         };
     }
 
-    toggle() {
+    toggleBtn1() {
         this.setState({
             popoverOpenBtn1: !this.state.popoverOpenBtn1    
         });
@@ -56,6 +56,31 @@ export default class FilmCard extends Component {
         })
     }
 
+ 
+    handleMouseOverBtn1() {
+        if (!this.state.popoverOpenBtn1) {
+            this.toggleBtn1()
+        }
+    }
+
+    handleMouseOutBtn1() {
+        if (this.state.popoverOpenBtn1) {
+            this.toggleBtn1()
+        }
+    }
+
+    handleMouseOverBtn2() {
+        if (!this.state.popoverOpenBtn1) {
+            this.toggleBtn2()
+        }
+    }
+
+    handleMouseOutBtn2() {
+        if (this.state.popoverOpenBtn2) {
+            this.toggleBtn2()
+        }
+    }
+
 
     render() {
         return (
@@ -67,35 +92,70 @@ export default class FilmCard extends Component {
                         src={"./images/films/" + this.props.title.split(" ").join("-").toLowerCase() + ".png"} alt="Card image cap"
                     />
                     <CardBody>
-                        <CardTitle align="center"><h5>{this.props.title}</h5></CardTitle>
-                        <CardSubtitle align="center"><h6>Episodio: {this.props.episode_id}</h6></CardSubtitle>
+                        <CardTitle align="center">
+                            <h5>{this.props.title}</h5>
+                        </CardTitle>
+                        <CardSubtitle align="center">
+                            <h6>Episodio: {this.props.episode_id}</h6>
+                        </CardSubtitle>
                         <CardText></CardText>
-                        <CardSubtitle><strong>Fecha:</strong> {this.props.release_date.split("-").reverse().join("-")} </CardSubtitle>
-                        <CardSubtitle><strong>Director:</strong> {this.props.director}</CardSubtitle>
-                        <CardSubtitle><strong>Productor:</strong> {this.props.producer}</CardSubtitle>
+                        <CardSubtitle>
+                            <strong>Fecha:</strong> {this.props.release_date.split("-").reverse().join("-")}
+                        </CardSubtitle>
+                        <CardSubtitle>
+                            <strong>Director:</strong> {this.props.director}
+                        </CardSubtitle>
+                        <CardSubtitle>
+                            <strong>Productor:</strong> {this.props.producer}
+                            </CardSubtitle>
                         <CardText></CardText>
 
-                        <Button id={this.props.title.split(" ").join("")} type="button" color="info" block>
+                        <Button 
+                            id={this.props.title.split(" ").join("")} 
+                            type="button" 
+                            color="info" 
+                            block
+                            onMouseOut={() => this.handleMouseOutBtn1()}
+                            onMouseOver={() => this.handleMouseOverBtn1()}
+                        >
                             Sinopsis
-                            </Button>
-                        <Popover placement="top" isOpen={this.state.popoverOpenBtn1} 
-                                 target={this.props.title.split(" ").join("")} toggle={this.toggle}>
-                            <PopoverHeader>{this.props.title} (Sinopsis)</PopoverHeader>
-                            <PopoverBody>{this.props.opening_crawl}</PopoverBody>
+                        </Button>
+                        <Popover 
+                            placement="top" 
+                            isOpen={this.state.popoverOpenBtn1} 
+                            target={this.props.title.split(" ").join("")} 
+                            toggle={this.toggleBtn1}
+                        >
+                            <PopoverHeader>
+                                {this.props.title} (Sinopsis)
+                            </PopoverHeader>
+                            <PopoverBody>
+                                {this.props.opening_crawl}
+                            </PopoverBody>
                         </Popover>
 
-                        <Button id={this.props.title.split(" ").join("") + "1"} type="button" color="secondary" block>
+                        <Button id={this.props.title.split(" ").join("") + "1"} 
+                                type="button" 
+                                color="secondary" 
+                                block
+                                onMouseOver={() => this.handleMouseOverBtn2()}
+                                onMouseOut={() => this.handleMouseOutBtn2()}
+                        >
                             Personajes
-                            </Button>
-                        <Popover placement="top" isOpen={this.state.popoverOpenBtn2} 
-                                 target={this.props.title.split(" ").join("") + "1"} toggle={this.toggleBtn2}>
-                            <PopoverHeader>{this.props.title} (Personajes)</PopoverHeader>
+                        </Button>
+                        <Popover 
+                            placement="top" 
+                            isOpen={this.state.popoverOpenBtn2} 
+                            target={this.props.title.split(" ").join("") + "1"} 
+                            toggle={this.toggleBtn2}
+                        >
+                            <PopoverHeader>
+                                {this.props.title} (Personajes)
+                            </PopoverHeader>
                             <PopoverBody> 
                                 {this.state.charactersName.sort()}
                             </PopoverBody>
                         </Popover>
-
-
                     </CardBody>
                 </Card>
             </div>
